@@ -1,0 +1,22 @@
+age_language_pairs = []
+for index, row in df.iterrows():
+    age = row['Age']
+    languages = row['LanguageHaveWorkedWith'].split(';')  # Assuming languages are separated by semicolons
+    for language in languages:
+        age_language_pairs.append((age, language.strip()))
+
+language_counts = Counter(age_language_pairs)
+
+ages = [pair[0] for pair in language_counts.keys()]
+languages = [pair[1] for pair in language_counts.keys()]
+frequencies = [count for count in language_counts.values()]
+
+plt.figure(figsize=(14, 8))
+plt.scatter(ages, languages, s=[f * 10 for f in frequencies], alpha=0.5)
+
+plt.xlabel('Age')
+plt.ylabel('Programming Languages')
+plt.title('Bubble Plot: Technology Preferences by Age')
+plt.grid(True)
+
+plt.show()
