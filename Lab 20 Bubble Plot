@@ -1,0 +1,14 @@
+compensation = df['ConvertedCompYearly']
+job_satisfaction = df['JobSat']
+age = df['Age']
+
+
+plt.figure(figsize=(10, 6))
+plt.scatter(compensation, job_satisfaction, s=age.values, alpha=0.5)
+
+plt.xlabel('Yearly Compensation')
+plt.ylabel('Job Satisfaction')
+plt.title('Bubble Plot: Compensation vs. Job Satisfaction')
+plt.grid(True)
+
+plt.show()
