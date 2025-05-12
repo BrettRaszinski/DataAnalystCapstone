@@ -1,0 +1,22 @@
+job_db_pairs = []
+for index, row in df.iterrows():
+    job_satisfaction = row['JobSat']
+    databases = row['DatabaseWantToWorkWith'].split(';')  # Assuming databases are separated by semicolons
+    for database in databases:
+        job_db_pairs.append((job_satisfaction, database.strip()))
+
+db_counts = Counter(job_db_pairs)
+
+job_sats = [pair[0] for pair in db_counts.keys()]
+databases = [pair[1] for pair in db_counts.keys()]
+frequencies = [count for count in db_counts.values()]
+
+plt.figure(figsize=(14, 8))
+plt.scatter(job_sats, databases, s=[f * 10 for f in frequencies], alpha=0.5)
+
+plt.xlabel('Job Satisfaction')
+plt.ylabel('Preferred Databases')
+plt.title('Bubble Plot: Preferred Databases vs. Job Satisfaction')
+plt.grid(True)
+
+plt.show()
